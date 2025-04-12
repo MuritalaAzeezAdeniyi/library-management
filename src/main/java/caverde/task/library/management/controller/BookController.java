@@ -1,8 +1,10 @@
 package caverde.task.library.management.controller;
 
 import caverde.task.library.management.dto.request.AddBookRequest;
+import caverde.task.library.management.dto.request.BorrowBookRequest;
 import caverde.task.library.management.dto.response.AddBookResponse;
 import caverde.task.library.management.dto.response.ApiResponse;
+import caverde.task.library.management.dto.response.BorrowBookResponse;
 import caverde.task.library.management.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,13 @@ public class BookController {
         }
 
     }
-
-
+     @PostMapping("/borrowBook")
+   public ResponseEntity<?> borrowBook(@RequestBody BorrowBookRequest borrowBookRequest) {
+        try{
+            BorrowBookResponse borrowBookResponse = bookService.borrowBook(borrowBookRequest);
+            return new ResponseEntity<>(new ApiResponse(true,borrowBookResponse), HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+   }
 }
