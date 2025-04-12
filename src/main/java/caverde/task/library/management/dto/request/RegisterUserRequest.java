@@ -1,16 +1,16 @@
 package caverde.task.library.management.dto.request;
 
 public class RegisterUserRequest {
-    private String firstName;
+    private String fullName;
     private String password;
     private String email;
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPassword() {

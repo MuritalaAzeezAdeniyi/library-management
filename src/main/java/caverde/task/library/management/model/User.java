@@ -15,6 +15,17 @@ public class User {
     private String fullName;
     private String password;
     private String email;
+    private boolean isLogging;
+
+
+
+    public boolean isLogging() {
+        return isLogging;
+    }
+
+    public void setLogging(boolean logging) {
+        isLogging = logging;
+    }
 
     public Long getUserId() {
         return userId;
