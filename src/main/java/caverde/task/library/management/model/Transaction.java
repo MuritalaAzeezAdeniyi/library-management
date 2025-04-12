@@ -12,11 +12,26 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transactionId;
-    private Long userId;
-    private Long bookId;
+    private String email;
+    private String title;
     private String transactionType;
     private LocalDateTime transactionDate;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Long getTransactionId() {
         return transactionId;
@@ -26,21 +41,7 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
 
     public String getTransactionType() {
         return transactionType;
