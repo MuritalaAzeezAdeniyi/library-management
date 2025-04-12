@@ -2,8 +2,10 @@ package caverde.task.library.management;
 
 import caverde.task.library.management.dto.request.AddBookRequest;
 import caverde.task.library.management.dto.request.BorrowBookRequest;
+import caverde.task.library.management.dto.request.ReturnBookRequest;
 import caverde.task.library.management.dto.response.AddBookResponse;
 import caverde.task.library.management.dto.response.BorrowBookResponse;
+import caverde.task.library.management.dto.response.ReturnBookResponse;
 import caverde.task.library.management.model.Book;
 import caverde.task.library.management.service.BookServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -38,5 +40,15 @@ public class BookServiceTest {
         BorrowBookResponse response = bookService.borrowBook(request);
         assertThat(response).isNotNull();
         assertThat(response.getMessage()).isEqualTo("Book Borrowed successfully");
+    }
+
+    @Test
+    public void testThatBookCanBeReturn(){
+        ReturnBookRequest request = new ReturnBookRequest();
+        request.setTitle("Java");
+        request.setEmail("aheed@gmail.com");
+        ReturnBookResponse response = bookService.returnBook(request);
+        assertThat(response).isNotNull();
+        assertThat(response.getMessage()).isEqualTo("Book Returned successfully");
     }
 }

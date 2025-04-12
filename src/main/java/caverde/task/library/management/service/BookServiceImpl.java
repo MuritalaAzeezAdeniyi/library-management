@@ -2,8 +2,10 @@ package caverde.task.library.management.service;
 
 import caverde.task.library.management.dto.request.AddBookRequest;
 import caverde.task.library.management.dto.request.BorrowBookRequest;
+import caverde.task.library.management.dto.request.ReturnBookRequest;
 import caverde.task.library.management.dto.response.AddBookResponse;
 import caverde.task.library.management.dto.response.BorrowBookResponse;
+import caverde.task.library.management.dto.response.ReturnBookResponse;
 import caverde.task.library.management.model.Book;
 import caverde.task.library.management.model.Transaction;
 import caverde.task.library.management.repository.BookRepo;
@@ -51,6 +53,24 @@ public class BookServiceImpl implements BookService {
         BorrowBookResponse borrowBookResponse = new BorrowBookResponse();
         borrowBookResponse.setMessage("Book Borrowed successfully");
         return borrowBookResponse;
+    }
+
+    @Override
+    public ReturnBookResponse returnBook(ReturnBookRequest returnBookRequest) {
+        Book book = findBookByTitle(returnBookRequest.getTitle());
+        if(book != null) {
+            book.setStock(book.getStock() + 1);
+            bookRepository.save(book);
+
+            Transaction transaction = new Transaction();
+            transaction.setEmail(returnBookRequest.getEmail());
+            transaction.setTitle(returnBookRequest.getTitle());
+            transaction.setTransactionType("return");
+            transactionRepository.save(transaction);
+        }
+        ReturnBookResponse returnBookResponse = new ReturnBookResponse();
+        returnBookResponse.setMessage("Book Returned successfully");
+        return returnBookResponse;
     }
 
     private Book findBookByTitle(String title) {
